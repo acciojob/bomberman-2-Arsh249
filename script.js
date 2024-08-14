@@ -36,24 +36,33 @@
   // Count bombs around a cell
   function countBombs(index) {
     // Logic to count bombs around the cell
-    const row = Math.floor(index / 10);
-  const col = index % 10;
-
+    const width = 10; // Assuming a 10x10 grid
+  const row = Math.floor(index / width);
+  const col = index % width;
   let bombCount = 0;
 
-  // Check all 8 surrounding cells
-  for (let r = row - 1; r <= row + 1; r++) {
-    for (let c = col - 1; c <= col + 1; c++) {
-      // Ensure the cell is within bounds and not the cell itself
-      if (r >= 0 && r < 10 && c >= 0 && c < 10 && !(r === row && c === col)) {
-        const neighborIndex = r * 10 + c;
-        const neighborCell = document.getElementById(neighborIndex);
-        if (neighborCell && neighborCell.classList.contains('bomb')) {
-          bombCount++;
-        }
+  // Define surrounding positions
+  const positions = [
+    { row: row - 1, col: col - 1 }, // Northwest
+    { row: row - 1, col: col },     // North
+    { row: row - 1, col: col + 1 }, // Northeast
+    { row: row, col: col - 1 },     // West
+    { row: row, col: col + 1 },     // East
+    { row: row + 1, col: col - 1 }, // Southwest
+    { row: row + 1, col: col },     // South
+    { row: row + 1, col: col + 1 }  // Southeast
+  ];
+
+  positions.forEach(pos => {
+    // Check if position is within bounds
+    if (pos.row >= 0 && pos.row < width && pos.col >= 0 && pos.col < width) {
+      const neighborIndex = pos.row * width + pos.col;
+      const neighborCell = document.getElementById(`${neighborIndex}`);
+      if (neighborCell && neighborCell.classList.contains('bomb')) {
+        bombCount++;
       }
     }
-  }
+  });
 
   return bombCount;
   }
@@ -109,5 +118,19 @@
       cell.textContent = '💣';
     });
   }
+function setCellDataAttributes() {
+  const width = 10; // Assuming a 10x10 grid
+
+  for (let i = 0; i < width * width; i++) {
+    const cell = document.getElementById(`${i}`);
+    if (cell) {
+      const bombCount = countBombs(i);
+      cell.setAttribute('data', bombCount);
+    }
+  }
+}
+
+// Call this function when initializing or resetting the game
+setCellDataAttributes();
 
   createGrid();
