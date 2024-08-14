@@ -1,4 +1,64 @@
-.grid-container {
+/* General styling for the grid container */
+#grid {
+  display: grid;
+  grid-template-columns: repeat(10, 40px); /* 10 columns, each 40px wide */
+  grid-template-rows: repeat(10, 40px); /* 10 rows, each 40px high */
+  gap: 2px; /* Space between cells */
+}
+
+/* Styling for each cell */
+#grid div {
+  width: 40px;
+  height: 40px;
+  background-color: #e0e0e0; /* Light gray background */
+  border: 1px solid #bbb; /* Light border */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Styling for cells that contain bombs */
+.bomb {
+  background-color: #ff6f6f; /* Light red background for bombs */
+}
+
+/* Styling for cells that have been revealed */
+.checked {
+  background-color: #f5f5f5; /* Light gray background for checked cells */
+  color: #333; /* Darker text color for visibility */
+}
+
+/* Styling for flagged cells */
+.flag {
+  background-color: #fdfd96; /* Light yellow background for flagged cells */
+  color: #ff0000; /* Red color for the flag icon */
+  font-size: 24px; /* Larger font size for the flag emoji */
+}
+
+/* Styling for cells with numbers (bomb counts) */
+#grid div[data] {
+  color: #333; /* Dark text color for numbers */
+}
+
+/* Styling for the result message */
+#result {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Styling for the remaining flags count */
+#flagsLeft {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+/* .grid-container {
     margin: 20px;
     display: grid;
     grid-template-columns: auto auto auto;
@@ -6,7 +66,7 @@
 }
 .grid-item {
     /* background-color: rgba(255, 255, 255, 0.5); */
-    background-color: transparent;
+    /* background-color: transparent;
     border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 20px;
     font-size: 30px;
@@ -16,4 +76,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */ */
